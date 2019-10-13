@@ -76,12 +76,16 @@ WSGI_APPLICATION = 'test_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.mysql',
+        'HOST': '127.0.0.1',
         'NAME': 'dbconntest',
-        'USER': 'dbconntest',
-        'HOST': 'localhost',
-        'PASSWORD': 'dbconntest',
-    }
+        'USER': 'root',
+        'CONN_MAX_AGE': 360,
+        'OPTIONS': {
+            'sql_mode': 'STRICT_TRANS_TABLES',
+            'charset': 'utf8mb4',
+        },
+    },
 }
 
 

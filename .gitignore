@@ -1,4 +1,6 @@
 .coverage
+.mypy_cache
+.toxenv
 *.iml
 *.pyc
 *.pyd

@@ -58,9 +58,9 @@ def fix_connection(sender: type, *, dbwrapper: BaseDatabaseWrapper, **kwargs: An
 
 
 class ReconnectTests(TestCase):
-    @classmethod
-    def tearDownClass(cls) -> None:
-        return
+    #@classmethod
+    #def tearDownClass(cls) -> None:
+    #    return
 
     def test_ensure_closed(self) -> None:
         from django.db import connection

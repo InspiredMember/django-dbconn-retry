@@ -42,9 +42,13 @@ else:
 
 def monkeypatch_django() -> None:
     def ensure_connection_with_retries(self: django_db_base.BaseDatabaseWrapper) -> None:
-        if self.connection is not None and hasattr(self.connection, 'closed') and self.connection.closed:
-            _log.debug("failed connection detected")
-            self.connection = None
+        if self.connection is not None:
+            if hasattr(self.connection, 'in_atomic_block') and self.connection.in_atomic_block:
+                _log.debug('in atomic block, returning')
+                return
+            elif hasattr(self.connection, 'closed') and self.connection.closed:
+                _log.debug("failed connection detected")
+                self.connection = None
 
         if self.connection is None and not hasattr(self, '_in_connecting'):
             with self.wrap_database_errors:
